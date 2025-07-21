@@ -29,6 +29,8 @@ A arquitetura foi pensada para ser escalável, modular e com separação clara d
 ## 📁 Estrutura do Projeto
 
 ```
+tree
+
 iluminacasa/
 ├── frontend/              # Projeto Next.js
 │   └── src/
