@@ -119,13 +119,13 @@ uvicorn app.main:app --reload
 
 ## 📌 Roadmap
 
--[x] Estrutura inicial com monorepo
--[x] Setup do Next.js e FastAPI
--[ ] Catálogo de produtos
--[ ] Carrinho e checkout
--[ ] Autenticação de usuários
--[ ] Integração com gateway de pagamento
--[ ] Deploy (Vercel + Render/Fly.io)
+- [x] Estrutura inicial com monorepo
+- [x] Setup do Next.js e FastAPI
+- [ ] Catálogo de produtos
+- [ ] Carrinho e checkout
+- [ ] Autenticação de usuários
+- [ ] Integração com gateway de pagamento
+- [ ] Deploy (Vercel + Render/Fly.io)
 
 ## 📝 Licença
 
