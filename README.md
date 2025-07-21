@@ -28,6 +28,7 @@ A arquitetura foi pensada para ser escalável, modular e com separação clara d
 
 ## 📁 Estrutura do Projeto
 
+```
 iluminacasa/
 ├── frontend/              # Projeto Next.js
 │   └── src/
@@ -60,7 +61,7 @@ iluminacasa/
 │
 ├── README.md
 └── .gitignore
-
+```
 
 ## ⚙️ Como rodar localmente
 
