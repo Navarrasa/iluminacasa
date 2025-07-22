@@ -15,7 +15,7 @@ A arquitetura foi pensada para ser escalável, modular e com separação clara d
 
 - Next.js – Framework React com renderização híbrida (SSG/SSR)
 - TypeScript – Tipagem estática
-- PNPM – Gerenciador de pacotes moderno
+- Bun – Gerenciador de pacotes moderno
 - React Hooks – Para controle de estado e efeitos
 - CSS Modules / TailwindCSS – Para a estilização da aplicação
 
@@ -71,7 +71,7 @@ iluminacasa/
 
 - Node.js (v18+)
 - Python (3.10+)
-- PNPM – para o frontend
+- Bun – para o frontend
 - uv – para o backend (alternativa ao pip)
 
 ## 🔧 Instalação
@@ -95,7 +95,7 @@ Instalar o bun
 ```
 bash
 
-npm install bun
+npm install -g bun
 ```
 
 #### Frontend (Next.js)

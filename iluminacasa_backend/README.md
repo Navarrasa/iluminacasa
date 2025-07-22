@@ -1,3 +1,7 @@
+# Project Tree IluminaCasa
+
+### Uma "Árvore Genealógica" do projeto, que demonstra todas as rotas e explica resumidamente a função de cada arquivo ou pasta.
+
 ```
 IluminaCasa
 ├─ iluminacasa_backend
@@ -6,9 +10,8 @@ IluminaCasa
 │  │  ├─ api
 │  │  │  └─ v1
 │  │  │     ├─ api.py       # Endpoint de Rotas da API
-│  │  │     ├─ auth.py      # Endpoint de Autenticação
+│  │  │     ├─ auth.py      # Endpoint de Autenticação (Login/Logout)
 │  │  │     ├─ cart.py      # Endpoint de Carrinho de Compras
-│  │  │     ├─ login.py     # Endpoint de Login/Logout
 │  │  │     ├─ orders.py    # Endpoint de Ordens de Compra
 │  │  │     ├─ product.py   # Endpoint de Produtos
 │  │  │     └─ users.py     # Endpoint de Usuários
@@ -16,9 +19,9 @@ IluminaCasa
 │  │  │  └─ main.py
 │  │  ├─ dependencies.py    # Injeção de dependências (ex: Auth, DB, API Clients)
 │  │  ├─ main.py            # Criação do app, inclusão de rotas
-│  │  ├─ models             # Schemas (Pydantic), modelos ORM se usar SQLAlchemy
+│  │  ├─ models             # Schemas (Serializers) -> Corpo para enviar ou receber dados em formato JSON
 │  │  │  └─ main.py
-│  │  ├─ services           # Lógica de negócio (ex: chamada à DummyJSON)
+│  │  ├─ services           # Lógica de negócio (ex: chamada à DummyJSON, Autenticação, etc)
 │  │  │  ├─ auth
 │  │  │  │  └─ auth_service.py
 │  │  │  └─ dummyjson.py
