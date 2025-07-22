@@ -84,13 +84,27 @@ git clone https://github.com/Navarrasa/IluminaCasa.git
 cd iluminacasa
 ```
 
+Instalar o uv
+```
+bash
+
+pip install uv
+```
+
+Instalar o bun
+```
+bash
+
+npm install bun
+```
+
 #### Frontend (Next.js)
 ```
 bash
 
-cd frontend
-pnpm install
-pnpm dev
+cd iluminacasa
+bun install
+bun dev
 ```
 
 #### Backend (FastAPI)
@@ -130,3 +144,4 @@ uvicorn app.main:app --reload
 ## 📝 Licença
 
 MIT © **devBruno - 2025**
+
