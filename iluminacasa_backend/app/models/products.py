@@ -1,5 +1,5 @@
 from pydantic import BaseModel, field_validator
-from typing import List, Optional
+from typing import List, Union
 
 """
 Schema para representar um produto.
@@ -38,19 +38,22 @@ class ProductSchema(BaseModel):
     description: str
     category: str
     price: float
-    discount: Optional[float] = 0.0
+    discount: Union[float | 0]
     brand: str
     tags: List[str]
-    image: List[str]
+    images: List[str]
 
+    # Validar que o campo preço não pode ser negativo
     @field_validator('price')
     def price_must_be_positive(cls, v):
         if v < 0:
             raise ValueError('price must be zero or positive')
         return v
-
+    
+    # Validar que o campo desconto não pode ser negativo
     @field_validator('discount')
     def discount_must_be_positive(cls, v):
         if v is not None and v < 0:
             raise ValueError('discount must be zero or positive')
         return v
+    

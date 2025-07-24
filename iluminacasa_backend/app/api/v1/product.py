@@ -13,3 +13,4 @@ async def get_all_products():
 @router.get("/products/{product_id}", summary="Get a product by ID", response_model=ProductSchema)
 async def get_product_by_id(product_id: int):
     return await get_product(product_id)
+
