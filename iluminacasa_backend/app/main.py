@@ -29,7 +29,7 @@ class BaseConfig:
         #  self.app.include_router(users.router, prefix="/users", tags=["users"])
 
         return self.app
-    
+
 
 # Create the FastAPI app instance
 base_config = BaseConfig()
