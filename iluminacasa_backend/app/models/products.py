@@ -1,4 +1,4 @@
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel
 from typing import List, Union
 
 """
@@ -32,28 +32,17 @@ Example:
     }
 """
 
+
+# Como é uma API externa, não é necessário validar os dados recebidos.
+# Pois não há como alterar os dados que vêm do DummyJSON.
+
 class ProductSchema(BaseModel):
     id: int
     title: str
     description: str
     category: str
     price: float
-    discount: Union[float | 0]
+    discount: Union[float, None] = None
     brand: str
     tags: List[str]
     images: List[str]
-
-    # Validar que o campo preço não pode ser negativo
-    @field_validator('price')
-    def price_must_be_positive(cls, v):
-        if v < 0:
-            raise ValueError('price must be zero or positive')
-        return v
-    
-    # Validar que o campo desconto não pode ser negativo
-    @field_validator('discount')
-    def discount_must_be_positive(cls, v):
-        if v is not None and v < 0:
-            raise ValueError('discount must be zero or positive')
-        return v
-    
