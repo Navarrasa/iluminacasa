@@ -33,6 +33,7 @@ Example:
         "first_name": "John",
         "last_name": "Doe",
     }
+
 """
 
 class LoginSchema(BaseModel):

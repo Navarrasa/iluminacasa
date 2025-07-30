@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from api.v1 import product
-from core.database.database import create_db_and_tables
+from api.v1 import product, auth
+from config.database.database import create_db_and_tables
 
 class BaseConfig:
     title: str = "IluminaCasa API"
@@ -21,7 +21,7 @@ class BaseConfig:
 
         # Main Routers
         self.app.include_router(product.router, prefix="/products", tags=["products"])
-        # self.app.include_router(auth.router, prefix="/auth", tags=["auth"])
+        self.app.include_router(auth.router, prefix="/auth", tags=["auth"])
         # self.app.include_router(cart.router, prefix="/cart", tags=["cart"])
         # self.app.include_router(orders.router, prefix="/orders", tags=["orders"])
         

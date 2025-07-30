@@ -1,4 +1,4 @@
 from api.v1.api import router
+from schemas.user import UserSchema
 
-# Rotas de Login:
-# auth
+# @router.get("/me", summary="User Profile", response_model="UserSchema")

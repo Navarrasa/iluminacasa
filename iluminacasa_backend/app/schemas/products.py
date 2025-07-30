@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Union
+from typing import List, Optional
 
 """
 Schema para representar um produto.
@@ -36,13 +36,47 @@ Example:
 # Como é uma API externa, não é necessário validar os dados recebidos.
 # Pois não há como alterar os dados que vêm do DummyJSON.
 
+class Dimensions(BaseModel):
+    width: float
+    height: float
+    depth: float
+
+class Review(BaseModel):
+    rating: int
+    comment: str
+    date: str
+    reviewerName: str
+    reviewerEmail: str
+
+class Meta(BaseModel):
+    createdAt: str
+    updatedAt: str
+    barcode: str
+    qrCode: str
+
 class ProductSchema(BaseModel):
     id: int
     title: str
     description: str
     category: str
     price: float
-    discount: Union[float, None] = None
-    brand: str
+    discountPercentage: Optional[float] = None
+    rating: Optional[float] = None
+    stock: Optional[int] = None
     tags: List[str]
+    brand: str
+    sku: Optional[str] = None
+    weight: Optional[float] = None
+    dimensions: Optional[Dimensions] = None
+    warrantyInformation: Optional[str] = None
+    shippingInformation: Optional[str] = None
+    availabilityStatus: Optional[str] = None
+    reviews: Optional[List[Review]] = None
+    returnPolicy: Optional[str] = None
+    minimumOrderQuantity: Optional[int] = None
+    meta: Optional[Meta] = None
     images: List[str]
+    thumbnail: Optional[str] = None
+
+class ProductListResponse(BaseModel):
+    products: List[ProductSchema]

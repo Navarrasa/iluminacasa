@@ -144,5 +144,3 @@ uvicorn app.main:app --reload
 ## 📝 Licença
 
 MIT © **devBruno - 2025**
-
-

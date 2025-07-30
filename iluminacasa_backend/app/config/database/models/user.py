@@ -1,5 +1,5 @@
 from typing import Annotated 
-from sqlmodel import Session, SQLModel, create_engine, Field
+from sqlmodel import SQLModel, Field
 
 class UserBase(SQLModel):
     email: str

@@ -1,30 +1,71 @@
-# Project Tree IluminaCasa
+```
+- Documentação geral da estrutura do projeto iluminacasa_backend.
 
-### Uma "Árvore Genealógica" do projeto, que demonstra todas as rotas e explica resumidamente a função de cada arquivo ou pasta.
+Este projeto é uma aplicação FastAPI organizada de forma modular e escalável, com as seguintes responsabilidades:
+
+- app/api/v1/
+    Contém os roteadores da API versão 1, organizados por domínio funcional:
+    - api.py: roteador principal que agrega os sub-roteadores (auth, cart, orders, product, users).
+    - auth.py, cart.py, orders.py, product.py, users.py: definem as rotas específicas e tratam as requisições para cada domínio.
+
+- app/config/
+    Configurações globais e infraestrutura da aplicação:
+    - settings.py: gerenciamento e carregamento das variáveis de ambiente via Pydantic.
+    - database/: inicialização da conexão com o banco de dados e definição dos modelos (tabelas) usando SQLModel.
+    - handlers/: configuração de handlers globais, como loggers e tratamento centralizado de exceções.
+    - middleware/: definição e registro dos middlewares globais, como CORS e rate limiting.
+
+- app/database.db
+    Arquivo de banco de dados SQLite (desenvolvimento).
+
+- app/dependencies.py
+    Define dependências reutilizáveis para as rotas, como autenticação, permissões e sessão de banco.
+
+- app/schemas/
+    Modelos Pydantic para validação e serialização de dados de entrada e saída, organizados por domínio (ex: auth.py, products.py).
+
+- app/services/
+    Camada de serviço contendo a lógica de negócio:
+    - auth/: serviços de autenticação (login, token, logout).
+    - dummyjson.py: integração com APIs externas para dados fictícios, por exemplo.
+
+Esta organização facilita a manutenção, escalabilidade e legibilidade do código, separando claramente a lógica de negócio, rotas, configurações, e modelos.
+
+Árvore de diretórios principal do projeto:
 
 iluminacasa_backend/
 │
 ├─ app/
 │  ├─ api/
 │  │  └─ v1/
-│  │     ├─ api.py           # Router principal que junta todos os endpoints da API v1
-│  │     ├─ auth.py          # Endpoints de autenticação (login, registro)
-│  │     ├─ cart.py          # Endpoints do carrinho de compras
-│  │     ├─ orders.py        # Endpoints de pedidos
-│  │     ├─ product.py       # Endpoints de produtos
-│  │     └─ users.py         # Endpoints de usuários
-│  │
-│  ├─ core/
-│  │  ├─ config.py           # Configurações gerais da aplicação (variáveis de ambiente, CORS, etc)
-│  │  ├─ middleware.py       # Middlewares (CORS, rate limiting, etc)
-│  │  ├─ security.py         # Funções de segurança (hashing, tokens JWT, etc)
-│  │  └─ database/
-│  │     ├─ database.py      # Configuração do banco de dados e sessão
-│  │     └─ models/          # Modelos ORM divididos por domínio (auth, cart, orders, user)
-│  │
-│  ├─ dependencies.py        # Dependências FastAPI (ex: sessão do banco, usuário atual)
-│  ├─ main.py                # Inicialização do app FastAPI, inclusão dos routers e middlewares
-│  ├─ schemas/               # Schemas Pydantic para validação e serialização de dados (auth, products)
-│  └─ services/              # Lógica de negócio e serviços externos (ex: auth_service.py, dummyjson.py)
-│
-└─ database.db               # Banco de dados SQLite local (se aplicável)
+│  │     ├─ api.py
+│  │     ├─ auth.py
+│  │     ├─ cart.py
+│  │     ├─ orders.py
+│  │     ├─ product.py
+│  │     └─ users.py
+│  ├─ config/
+│  │  ├─ database/
+│  │  │  ├─ database.py
+│  │  │  └─ models/
+│  │  │     ├─ auth.py
+│  │  │     ├─ cart.py
+│  │  │     ├─ orders.py
+│  │  │     └─ user.py
+│  │  ├─ handlers/
+│  │  │  └─ config.py
+│  │  ├─ middleware/
+│  │  │  └─ config.py
+│  │  └─ settings.py
+│  ├─ database.db
+│  ├─ dependencies.py
+│  ├─ main.py
+│  ├─ schemas/
+│  │  ├─ auth.py
+│  │  └─ products.py
+│  └─ services/
+│     ├─ auth/
+│     │  └─ auth_service.py
+│     └─ dummyjson.py
+"""
+```
