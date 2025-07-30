@@ -1,4 +1,4 @@
-from pydantic import BaseModel, field_validator, Field
+from pydantic import BaseModel, field_validator, Field, EmailStr
 from typing import Annotated
 
 """
@@ -37,28 +37,16 @@ Example:
 """
 
 class LoginSchema(BaseModel):
-    email: str
+    email: EmailStr
     password: str
-
-    @field_validator("email")
-    def validate_email(cls, value: str) -> str:
-        if "@" not in value or "." not in value:
-            raise ValueError("Invalid email format")
-        return value
     
 
 class RegisterSchema(BaseModel):
-    email: Annotated[str, Field(min_length=5, max_length=100)]
+    email: EmailStr
     password: Annotated[str, Field(min_length=8, max_length=100)]
     first_name: Annotated[str, Field(min_length=5, max_length=100)]
     last_name: Annotated[str, Field(min_length=5, max_length=100)]
 
-    @field_validator("email")
-    def validate_email(cls, value: str) -> str:
-        if "@" not in value or "." not in value:
-            raise ValueError("Invalid email format")
-        return value
-    
     @field_validator("first_name", "last_name")
     def validate_name(cls, value: str) -> str:
         if not value.isalpha():

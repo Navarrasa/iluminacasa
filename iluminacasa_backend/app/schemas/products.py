@@ -32,7 +32,6 @@ Example:
     }
 """
 
-
 # Como é uma API externa, não é necessário validar os dados recebidos.
 # Pois não há como alterar os dados que vêm do DummyJSON.
 

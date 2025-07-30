@@ -1,6 +1,14 @@
 from typing import Annotated 
 from sqlmodel import SQLModel, Field
 
+"""
+Tabela para representar um usuário.
+
+
+
+
+"""
+
 class UserBase(SQLModel):
     email: str
     first_name: str
