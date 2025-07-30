@@ -145,3 +145,4 @@ uvicorn app.main:app --reload
 
 MIT © **devBruno - 2025**
 
+

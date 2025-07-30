@@ -1,6 +1,6 @@
 from api.v1.api import router
 from services.dummyjson import get_products, get_product
-from models.products import ProductSchema
+from schemas.products import ProductSchema
 
 
 # Retorna todos os produtos da API
