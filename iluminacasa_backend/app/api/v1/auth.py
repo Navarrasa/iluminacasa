@@ -1,4 +1,4 @@
-from api.v1.api import router
+from fastapi import APIRouter
 from services.auth.auth_service import userLogin, userRegister, userLogout
 from schemas.auth import LoginSchema, RegisterSchema
 
@@ -26,16 +26,16 @@ o gerenciamento seguro de sessões de usuário.
 
 """
 
-@router.post("/auth/login", summary="User login", response_model=LoginSchema)
+router = APIRouter(prefix="/auth", tags=["auth"])
+
+@router.post("/login", summary="User login", response_model=LoginSchema)
 async def loginUser(login: LoginSchema):
     return await userLogin(login)
 
-
-@router.post("/auth/register", summary="User registration", response_model=RegisterSchema)
+@router.post("/register", summary="User registration", response_model=RegisterSchema)
 async def registerUser(register: RegisterSchema):
     return await userRegister(register)
 
-
-@router.post("/auth/logout", summary="User logout")
+@router.post("/logout", summary="User logout")
 async def logoutUser():
     return await userLogout()

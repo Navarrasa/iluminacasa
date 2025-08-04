@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api.v1 import product, auth
+from api.v1.api import router as api_router
 from config.database.database import create_db_and_tables
 
 from config.database.models.orders import Order  # noqa: F401
@@ -22,14 +22,8 @@ class BaseConfig:
         # Configurações do banco de dados
         create_db_and_tables()
 
-        # Main Routers
-        self.app.include_router(product.router, prefix="/products", tags=["products"])
-        self.app.include_router(auth.router, prefix="/auth", tags=["auth"])
-        # self.app.include_router(cart.router, prefix="/cart", tags=["cart"])
-        # self.app.include_router(orders.router, prefix="/orders", tags=["orders"])
-        
-        # User Routers
-        # self.app.include_router(users.router, prefix="/users", tags=["users"])
+        # Main Router
+        self.app.include_router(api_router, prefix="/api/v1")
 
         return self.app
 
