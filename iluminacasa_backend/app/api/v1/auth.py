@@ -1,6 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from services.auth.auth_service import userLogin, userRegister, userLogout
 from schemas.auth import LoginSchema, RegisterSchema
+from config.database.database import get_session
 
 """
 auth.py
@@ -29,12 +30,12 @@ o gerenciamento seguro de sessões de usuário.
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/login", summary="User login", response_model=LoginSchema)
-async def loginUser(login: LoginSchema):
-    return await userLogin(login)
+async def loginUser(login: LoginSchema, db=Depends(get_session)):
+    return await userLogin(login, db)
 
 @router.post("/register", summary="User registration", response_model=RegisterSchema)
-async def registerUser(register: RegisterSchema):
-    return await userRegister(register)
+async def registerUser(register: RegisterSchema, db=Depends(get_session)):
+    return await userRegister(register, db)
 
 @router.post("/logout", summary="User logout")
 async def logoutUser():
