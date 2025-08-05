@@ -17,16 +17,16 @@ async def userLogin(login_data: LoginSchema, db=Depends(get_session)):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
     # Cria o token de acesso através do ID do usuário
-    token = create_access_token({"sub": user.id})
+    access_token = create_access_token({"sub": user.id})
 
     # Define o cookie de sessão com o token JWT
     response = JSONResponse(content={"message": "Logged in successfully!"})
     response.set_cookie(
         key="access_token",
-        value=f"{token}",
+        value=access_token,
         httponly=True,
         samesite="lax",
-        secure=True,  # só em produção com HTTPS
+        secure=False,  # só em produção com HTTPS
         max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
     )
     return response

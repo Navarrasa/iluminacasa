@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from services.dummyjson import get_products, get_product
+from services.products.dummyjson import get_products, get_product
 from schemas.products import ProductSchema
 
 router = APIRouter(prefix="/products", tags=["products"])
