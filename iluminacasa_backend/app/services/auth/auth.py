@@ -13,7 +13,7 @@ async def login(login_data: LoginSchema, db: Session):
     Função para autenticar um usuário e retornar um token JWT ou sessão.
     """
     # Lógica para autenticar o usuário e gerar o token
-    user = get_user(login_data.email, db)
+    user = get_user(db, login_data.email)
     if not user or not verify_password(login_data.password, user.password):
         return False
     return user
