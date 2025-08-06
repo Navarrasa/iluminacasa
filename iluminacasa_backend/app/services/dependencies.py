@@ -1,35 +1,46 @@
-from fastapi import Depends, HTTPException, Request
-from jose import JWTError, jwt
+from typing import Annotated
+import jwt
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from jwt.exceptions import InvalidTokenError
+from sqlmodel import select
+from config.database.models.token import TokenData
+from config.database.models.user import User
 from config.settings import settings
 from config.database.database import get_session
-from config.database.models.user import User
-from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-def get_current_user(
-    request: Request,
-    token: str | None = Depends(oauth2_scheme),
-    db: Session = Depends(get_session),
-) -> User:
-    # Se não recebeu token pelo header Authorization, tenta pegar cookie
-    if token is None:
-        token = request.cookies.get("access_token")
+def get_user(db, email: str):
+    statement = select(User).where(User.email == email)
+    user = db.exec(statement).first()
+    return user
 
-    if not token:
-        raise HTTPException(status_code=401, detail="Not authenticated")
-
+async def get_current_user(
+        token: str = Depends(oauth2_scheme),
+        db=Depends(get_session)
+    ):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
-        user_id: int = payload.get("sub")  # type: ignore
-        if user_id is None:
-            raise HTTPException(status_code=401, detail="Invalid token")
-    except JWTError:
-        raise HTTPException(status_code=401, detail="Invalid token")
-
-    user = db.query(User).filter(User.id == user_id).first()  # type: ignore
-    if not user:
-        raise HTTPException(status_code=401, detail="User not found")
-
+        email = payload.get("sub")
+        if email is None:
+            raise credentials_exception
+    except InvalidTokenError:
+        raise credentials_exception
+    user = get_user(db, email)
+    if user is None:
+        raise credentials_exception
     return user
+
+
+async def get_current_active_user(
+    current_user: Annotated[User, Depends(get_current_user)],
+):
+    if not current_user.is_active:
+        raise HTTPException(status_code=400, detail="Inactive user")
+    return current_user

@@ -1,7 +1,14 @@
-from fastapi import APIRouter, Depends
-from services.auth.auth_service import userLogin, userRegister, userLogout
+from fastapi import APIRouter, Depends, HTTPException, status
+from services.auth.auth import login, register, logout
+from services.auth.security import create_access_token
 from schemas.auth import LoginSchema, RegisterSchema
 from config.database.database import get_session
+from datetime import timedelta
+from typing import Annotated
+from fastapi.security import OAuth2PasswordRequestForm
+from config.settings import settings
+from config.database.models.token import Token
+from sqlmodel import Session
 
 """
 auth.py
@@ -29,14 +36,25 @@ o gerenciamento seguro de sessões de usuário.
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-@router.post("/login", summary="User login", response_model=LoginSchema)
-async def loginUser(login: LoginSchema, db=Depends(get_session)):
-    return await userLogin(login, db)
+@router.post("/login", summary="User login", response_model=Token)
+async def loginUser(form_data: LoginSchema, db: Session = Depends(get_session) ) -> Token:
+    user = await login(form_data, db )
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect email or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        email=user.email, expires_delta=access_token_expires
+    )
+    return Token(access_token=access_token, token_type="bearer")
 
 @router.post("/register", summary="User registration", response_model=RegisterSchema)
-async def registerUser(register: RegisterSchema, db=Depends(get_session)):
-    return await userRegister(register, db)
+async def registerUser(register_data: RegisterSchema, db=Depends(get_session)):
+    return await register(register_data, db)
 
 @router.post("/logout", summary="User logout")
 async def logoutUser():
-    return await userLogout()
+    return await logout()
