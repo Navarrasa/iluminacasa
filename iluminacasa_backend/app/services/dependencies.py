@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jwt.exceptions import InvalidTokenError
 from sqlmodel import select
-from config.database.models.token import TokenData
+from schemas.token import TokenData
 from config.database.models.user import User
 from config.settings import settings
 from config.database.database import get_session

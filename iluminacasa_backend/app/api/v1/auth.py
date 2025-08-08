@@ -7,7 +7,7 @@ from datetime import timedelta
 from typing import Annotated
 from fastapi.security import OAuth2PasswordRequestForm
 from config.settings import settings
-from config.database.models.token import Token
+from iluminacasa_backend.app.schemas.token import Token
 from sqlmodel import Session
 
 """

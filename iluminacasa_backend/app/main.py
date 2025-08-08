@@ -5,7 +5,7 @@ from config.settings import settings
 from config.database.models.orders import Order  # noqa: F401
 from config.database.models.cart import Cart # noqa: F401
 from config.database.models.user import User # noqa: F401
-from config.database.models.token import Token, TokenData # noqa: F401
+from iluminacasa_backend.app.schemas.token import Token, TokenData # noqa: F401
 
 
 class BaseConfig:
