@@ -10,3 +10,4 @@ class User(SQLModel, table=True):
     is_active: bool | None = Field(index=True, default=False)
     username: str | None = Field(index=True, max_length=100)
     created_at: datetime = Field(default_factory=datetime.now)
+    
