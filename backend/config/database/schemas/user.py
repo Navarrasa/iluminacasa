@@ -1,16 +1,17 @@
 from pydantic import BaseModel, EmailStr
+from config.database.models.user import User
 
 # Registro de usuários
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
-    full_name: str
+    username: str
 
 # GET de usuários
 class UserRead(BaseModel):
     id: int
     email: EmailStr
-    full_name: str
+    username: str
     is_active: bool
 
     class Config:
@@ -20,3 +21,6 @@ class UserRead(BaseModel):
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+
+class UserInDB(User):
+    hashed_password: str
