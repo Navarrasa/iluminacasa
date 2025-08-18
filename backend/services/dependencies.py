@@ -1,11 +1,13 @@
 from sqlmodel import Session, select
 from config.database.models.user import User
+from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
 import jwt
 from fastapi import Depends, HTTPException, status, Request
 from config.config import settings
 from config.database.config import get_session
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login") 
 
 def get_user(db: Session, email: str):
     statement = select(User).where(User.email == email) # SELECT * FROM USUARIOS WHERE usuario.EMAIL == EMAIL
@@ -13,6 +15,7 @@ def get_user(db: Session, email: str):
     user = result.first() # USER = PRIMEIRO RESULTADO DA CONSULTA
     return user
 
+# Pega current_user através dos cookies e não header authorization
 def get_current_user(request: Request, db=Depends(get_session)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
