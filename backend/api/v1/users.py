@@ -1,5 +1,5 @@
 from datetime import timedelta
-from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi import APIRouter, Depends, status, HTTPException, Response
 from typing import Annotated
 from sqlmodel import Session
 from config.database.schemas.user import UserCreate, UserLogin
@@ -19,9 +19,9 @@ router = APIRouter()
 async def userRegistration(register_data: UserCreate, db: SessionDep):
     return await register(register_data, db)
 
-# login
+# login usando cookies
 @router.post("/login", summary="User login", response_model=Token)
-async def loginUser(form_data: UserLogin, db: SessionDep ) -> Token:
+async def loginUser(form_data: UserLogin, db: SessionDep, response: Response):
     user = await login(form_data, db )
     if not user:
         raise HTTPException(
@@ -33,7 +33,19 @@ async def loginUser(form_data: UserLogin, db: SessionDep ) -> Token:
     access_token = create_access_token(
         email=user.email, expires_delta=access_token_expires
     )
-    return Token(access_token=access_token, token_type="bearer")
+    response.set_cookie(
+        key="access_token",
+        value=access_token,
+        httponly=True,
+        # secure=True,
+        # path="/",
+        samesite="lax",
+        max_age=60*60*24*7  # 7 days
+    )
+    return {
+        "access_token": access_token,
+        "token_type": "bearer"
+    }
 
 # logout
 @router.post("/logout", summary="User logout")
