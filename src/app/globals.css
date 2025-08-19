@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Federant&family=Poppins:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --primary-color: #256D85;
+  --accent-color: #F2994A;
+  --background-color: #F5F7FA;
+  --text-color: #333333;
+  --border-color: #D1D5DB;
+  --font-federant: 'Federant', serif;
+  --font-poppins: 'Poppins', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body, html{
+  height: 100%;
+}
+
+body{
+  background-color: #F5F7FA;
+}
+
