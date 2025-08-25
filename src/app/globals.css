@@ -27,3 +27,6 @@ body{
   background-color: #F5F7FA;
 }
 
+.font-federant{
+  font-family: var(--font-federant);
+}

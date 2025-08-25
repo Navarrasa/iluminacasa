@@ -8,10 +8,10 @@ export function Header() {
   const isMobile = useMediaQuery("(max-width: 689px)");
 
   return (
-    <header className="flex justify-between p-4 w-full h-auto">
+    <header className="flex justify-between p-4 w-full h-auto fixed">
       <div className="w-full flex items-center justify-between sm:p-8 p-2">
         {/* Logo */}
-        <div className="sm:text-3xl text-xl">IluminaCasa</div>
+        <div className="sm:text-3xl text-2xl font-federant tracking-wider">IluminaCasa</div>
 
         {isMobile && <MobileAccountMenu />}
 
