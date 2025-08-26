@@ -1,7 +1,7 @@
 import { Footer } from '@/app/components/footer';
 import { Poppins } from 'next/font/google';
 import type { Metadata } from "next";
-import "@/app/globals.css";
+import "@/styles/globals.css";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function LoginLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br">
-      <body>
+      <body className={`${poppins.className} antialiased`}>
         {children}
         <Footer />
       </body>

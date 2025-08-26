@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import Settings from '@mui/icons-material/Settings';
+import Lightbulb from '@mui/icons-material/Lightbulb';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Login from '@mui/icons-material/Login';
@@ -24,6 +24,41 @@ export function DesktopAccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+   // Estado do tema: "light" ou "dark"
+    const [theme, setTheme] = React.useState<'light' | 'dark'>(() => {
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('theme');
+        if (stored === 'light' || stored === 'dark') return stored;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      return 'light';
+    });
+  
+    // Função para alternar tema
+    const toggleTheme = () => {
+      const newTheme = theme === 'light' ? 'dark' : 'light';
+      setTheme(newTheme);
+  
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('theme', newTheme);
+        if (newTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+    };
+  
+    React.useEffect(() => {
+      // Aplica a classe dark no carregamento
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }, [theme]);
+
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', gap: 0 }}>
@@ -42,7 +77,7 @@ export function DesktopAccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+            <Avatar sx={{ width: 32, height: 32}}></Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -86,13 +121,16 @@ export function DesktopAccountMenu() {
         <MenuItem component={Link} href='/profile' onClick={handleClose}>
           <Avatar /> Profile
         </MenuItem>
+
         <Divider />
-        <MenuItem component={Link} href='/settings' onClick={handleClose}>
+
+        <MenuItem onClick={(e) => { e.stopPropagation(); toggleTheme(); }}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <Lightbulb fontSize="small" color={theme === 'light' ? 'warning' : 'primary'} />
           </ListItemIcon>
-          Settings
+          Tema {theme === 'light' ? 'Claro' : 'Escuro'}
         </MenuItem>
+
         <MenuItem component={Link} href='/login' onClick={handleClose}>
           <ListItemIcon>
             <Login fontSize="small" />

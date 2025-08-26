@@ -12,21 +12,26 @@
   --font-poppins: 'Poppins', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --primary-color: #58A6FF;
+  --secondary-color: #1C7ED6;
+  --accent-color: #F2994A; /* pode manter o mesmo */
+  --background-color: #121212;
+  --text-color: #E5E7EB;
+  --border-color: #374151;
 }
 
 body, html{
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.6s ease, color 0.6s ease;
   height: 100%;
-}
-
-body{
-  background-color: #F5F7FA;
 }
 
 .font-federant{
   font-family: var(--font-federant);
+}
+
+.font-poppins{
+  font-family: var(--font-poppins);
 }
