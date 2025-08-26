@@ -7,17 +7,15 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import Home from '@mui/icons-material/Home';
 import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
-import Lightbulb from '@mui/icons-material/Lightbulb';
-import AccountBalance from '@mui/icons-material/AccountBalance';
-import AddShoppingCart from '@mui/icons-material/AddShoppingCart';
-import SettingsPhone from '@mui/icons-material/SettingsPhone';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Login from '@mui/icons-material/Login';
 import Link from 'next/link';
 
-export function MobileAccountMenu() {
+export function DesktopAccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -28,11 +26,18 @@ export function MobileAccountMenu() {
   };
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', gap: 0 }}>
+        <Tooltip title="Carrinho">
+          <Typography sx={{ minWidth: 100 }}><Link href='/cart'><ShoppingCartIcon /></Link></Typography>
+        </Tooltip>
+        <Tooltip title="Favoritos">
+          <Typography sx={{ minWidth: 100 }}><Link href='/favorites'><FavoriteIcon /></Link></Typography>
+        </Tooltip>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
+            sx={{ ml: 2 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
@@ -82,48 +87,17 @@ export function MobileAccountMenu() {
           <Avatar /> Profile
         </MenuItem>
         <Divider />
-        <MenuItem component={Link} href='/' onClick={handleClose}>
-          <ListItemIcon>
-            <Home fontSize="small" />
-          </ListItemIcon>
-          Home
-        </MenuItem>
-        <MenuItem component={Link} href='/catalog' onClick={handleClose}>
-          <ListItemIcon>
-            <AddShoppingCart fontSize="small" />
-          </ListItemIcon>
-          Catálogo
-        </MenuItem>
-        <MenuItem component={Link} href='/about' onClick={handleClose}>
-          <ListItemIcon>
-            <AccountBalance fontSize="small" />
-          </ListItemIcon>
-          Sobre Nós
-        </MenuItem>
-        <MenuItem component={Link} href='/faq' onClick={handleClose}>
-          <ListItemIcon>
-            <Lightbulb fontSize="small" />
-          </ListItemIcon>
-          FAQ
-        </MenuItem>
-        <MenuItem component={Link} href='/contact' onClick={handleClose}>
-          <ListItemIcon>
-            <SettingsPhone fontSize="small" />
-          </ListItemIcon>
-          Contato
-        </MenuItem>
-        <Divider />
         <MenuItem component={Link} href='/settings' onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem component={Link} href='/logout' onClick={handleClose}>
+        <MenuItem component={Link} href='/login' onClick={handleClose}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Login fontSize="small" />
           </ListItemIcon>
-          Logout
+          Login
         </MenuItem>
       </Menu>
     </React.Fragment>

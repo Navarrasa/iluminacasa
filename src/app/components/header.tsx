@@ -1,14 +1,14 @@
 "use client";
 import { useMediaQuery } from "@mui/material";
-import { MobileAccountMenu } from "@/app/components/ui/mobileaccountmenu";
-import { DesktopAccountMenu } from "@/app/components/ui/desktopaccountmenu";
-import { Navbar } from "@/app/components/ui/navbar";
+import { MobileAccountMenu } from "@/app/components/ui/account_settings/mobileaccountmenu";
+import { DesktopAccountMenu } from "@/app/components/ui/account_settings/desktopaccountmenu";
+import { Navbar } from "@/app/components/ui/account_settings/navbar";
 export function Header() {
   
   const isMobile = useMediaQuery("(max-width: 689px)");
 
   return (
-    <header className="flex justify-between p-4 w-full h-auto fixed">
+    <header className="flex justify-between p-4 w-full h-auto">
       <div className="w-full flex items-center justify-between sm:p-8 p-2">
         {/* Logo */}
         <div className="sm:text-3xl text-2xl font-federant tracking-wider">IluminaCasa</div>

@@ -7,14 +7,18 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
+import Home from '@mui/icons-material/Home';
 import Settings from '@mui/icons-material/Settings';
-import Login from '@mui/icons-material/Login';
+import Logout from '@mui/icons-material/Logout';
+import Lightbulb from '@mui/icons-material/Lightbulb';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import AccountBalance from '@mui/icons-material/AccountBalance';
+import AddShoppingCart from '@mui/icons-material/AddShoppingCart';
+import SettingsPhone from '@mui/icons-material/SettingsPhone';
 import Link from 'next/link';
 
-export function DesktopAccountMenu() {
+export function MobileAccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,20 +30,15 @@ export function DesktopAccountMenu() {
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Typography sx={{ minWidth: 100 }}>desejos</Typography>
-        <Typography sx={{ minWidth: 100 }}>notifica</Typography>
-        <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar sx={{ width: 32, height: 32 }}></Avatar>
           </IconButton>
-        </Tooltip>
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -82,17 +81,60 @@ export function DesktopAccountMenu() {
           <Avatar /> Profile
         </MenuItem>
         <Divider />
+        <MenuItem component={Link} href='/' onClick={handleClose}>
+          <ListItemIcon>
+            <Home fontSize="small" />
+          </ListItemIcon>
+          Home
+        </MenuItem>
+        <MenuItem component={Link} href='/catalog' onClick={handleClose}>
+          <ListItemIcon>
+            <AddShoppingCart fontSize="small" />
+          </ListItemIcon>
+          Catálogo
+        </MenuItem>
+        <MenuItem component={Link} href='/about' onClick={handleClose}>
+          <ListItemIcon>
+            <AccountBalance fontSize="small" />
+          </ListItemIcon>
+          Sobre Nós
+        </MenuItem>
+        <MenuItem component={Link} href='/faq' onClick={handleClose}>
+          <ListItemIcon>
+            <Lightbulb fontSize="small" />
+          </ListItemIcon>
+          FAQ
+        </MenuItem>
+        <MenuItem component={Link} href='/contact' onClick={handleClose}>
+          <ListItemIcon>
+            <SettingsPhone fontSize="small" />
+          </ListItemIcon>
+          Contato
+        </MenuItem>
+        <MenuItem component={Link} href='/cart' onClick={handleClose}>
+          <ListItemIcon>
+            <ShoppingCartIcon fontSize="small" />
+          </ListItemIcon>
+          Carrinho
+        </MenuItem>
+        <MenuItem component={Link} href='/favorites' onClick={handleClose}>
+          <ListItemIcon>
+            <FavoriteIcon fontSize="small" />
+          </ListItemIcon>
+          Favoritos
+        </MenuItem>
+        <Divider />
         <MenuItem component={Link} href='/settings' onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem component={Link} href='/login' onClick={handleClose}>
+        <MenuItem component={Link} href='/logout' onClick={handleClose}>
           <ListItemIcon>
-            <Login fontSize="small" />
+            <Logout fontSize="small" />
           </ListItemIcon>
-          Login
+          Logout
         </MenuItem>
       </Menu>
     </React.Fragment>

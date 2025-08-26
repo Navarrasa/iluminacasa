@@ -25,7 +25,7 @@ export default function Login() {
   };
 
     return(
-    <main className="max-w-md mx-auto mt-20 p-6 border rounded shadow">
+    <main className="max-w-md h-full mx-auto mt-20 p-6 border rounded shadow">
       <h1 className="text-2xl mb-6">Login</h1>
       
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
