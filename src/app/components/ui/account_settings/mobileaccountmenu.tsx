@@ -28,38 +28,38 @@ export function MobileAccountMenu() {
   };
 
   // Estado do tema: "light" ou "dark"
-  const [theme, setTheme] = React.useState<'light' | 'dark'>(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('theme');
-      if (stored === 'light' || stored === 'dark') return stored;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    return 'light';
-  });
+  // const [theme, setTheme] = React.useState<'light' | 'dark'>(() => {
+  //   if (typeof window !== 'undefined') {
+  //     const stored = localStorage.getItem('theme');
+  //     if (stored === 'light' || stored === 'dark') return stored;
+  //     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  //   }
+  //   return 'light';
+  // });
 
-  // Função para alternar tema
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
+  // // Função para alternar tema
+  // const toggleTheme = () => {
+  //   const newTheme = theme === 'light' ? 'dark' : 'light';
+  //   setTheme(newTheme);
 
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', newTheme);
-      if (newTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    }
-  };
+  //   if (typeof window !== 'undefined') {
+  //     localStorage.setItem('theme', newTheme);
+  //     if (newTheme === 'dark') {
+  //       document.documentElement.classList.add('dark');
+  //     } else {
+  //       document.documentElement.classList.remove('dark');
+  //     }
+  //   }
+  // };
 
-  React.useEffect(() => {
-    // Aplica a classe dark no carregamento
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
+  // React.useEffect(() => {
+  //   // Aplica a classe dark no carregamento
+  //   if (theme === 'dark') {
+  //     document.documentElement.classList.add('dark');
+  //   } else {
+  //     document.documentElement.classList.remove('dark');
+  //   }
+  // }, [theme]);
 
   return (
     <React.Fragment>
@@ -168,12 +168,12 @@ export function MobileAccountMenu() {
         <Divider />
         
         {/* MenuItem para trocar o tema */}
-        <MenuItem onClick={(e) => { e.stopPropagation(); toggleTheme(); }}>
+        {/* <MenuItem onClick={(e) => { e.stopPropagation(); toggleTheme(); }}>
           <ListItemIcon>
             <Lightbulb fontSize="small" color={theme === 'light' ? 'warning' : 'primary'} />
           </ListItemIcon>
           Tema {theme === 'light' ? 'Claro' : 'Escuro'}
-        </MenuItem>
+        </MenuItem> */}
 
         <MenuItem component={Link} href='/logout' onClick={handleClose}>
           <ListItemIcon>
