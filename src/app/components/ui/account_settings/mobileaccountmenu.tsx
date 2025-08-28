@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -7,11 +7,11 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import Home from '@mui/icons-material/Home';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import Lightbulb from '@mui/icons-material/Lightbulb';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccountBalance from '@mui/icons-material/AccountBalance';
 import AddShoppingCart from '@mui/icons-material/AddShoppingCart';
 import SettingsPhone from '@mui/icons-material/SettingsPhone';
@@ -26,10 +26,44 @@ export function MobileAccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // Estado do tema: "light" ou "dark"
+  // const [theme, setTheme] = React.useState<'light' | 'dark'>(() => {
+  //   if (typeof window !== 'undefined') {
+  //     const stored = localStorage.getItem('theme');
+  //     if (stored === 'light' || stored === 'dark') return stored;
+  //     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  //   }
+  //   return 'light';
+  // });
+
+  // // Função para alternar tema
+  // const toggleTheme = () => {
+  //   const newTheme = theme === 'light' ? 'dark' : 'light';
+  //   setTheme(newTheme);
+
+  //   if (typeof window !== 'undefined') {
+  //     localStorage.setItem('theme', newTheme);
+  //     if (newTheme === 'dark') {
+  //       document.documentElement.classList.add('dark');
+  //     } else {
+  //       document.documentElement.classList.remove('dark');
+  //     }
+  //   }
+  // };
+
+  // React.useEffect(() => {
+  //   // Aplica a classe dark no carregamento
+  //   if (theme === 'dark') {
+  //     document.documentElement.classList.add('dark');
+  //   } else {
+  //     document.documentElement.classList.remove('dark');
+  //   }
+  // }, [theme]);
+
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -39,7 +73,6 @@ export function MobileAccountMenu() {
           >
             <Avatar sx={{ width: 32, height: 32 }}></Avatar>
           </IconButton>
-        </Tooltip>
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -81,44 +114,67 @@ export function MobileAccountMenu() {
         <MenuItem component={Link} href='/profile' onClick={handleClose}>
           <Avatar /> Profile
         </MenuItem>
+        
         <Divider />
+
         <MenuItem component={Link} href='/' onClick={handleClose}>
           <ListItemIcon>
             <Home fontSize="small" />
           </ListItemIcon>
           Home
         </MenuItem>
+
         <MenuItem component={Link} href='/catalog' onClick={handleClose}>
           <ListItemIcon>
             <AddShoppingCart fontSize="small" />
           </ListItemIcon>
           Catálogo
         </MenuItem>
+
         <MenuItem component={Link} href='/about' onClick={handleClose}>
           <ListItemIcon>
             <AccountBalance fontSize="small" />
           </ListItemIcon>
           Sobre Nós
         </MenuItem>
+
         <MenuItem component={Link} href='/faq' onClick={handleClose}>
           <ListItemIcon>
             <Lightbulb fontSize="small" />
           </ListItemIcon>
           FAQ
         </MenuItem>
+
         <MenuItem component={Link} href='/contact' onClick={handleClose}>
           <ListItemIcon>
             <SettingsPhone fontSize="small" />
           </ListItemIcon>
           Contato
         </MenuItem>
-        <Divider />
-        <MenuItem component={Link} href='/settings' onClick={handleClose}>
+
+        <MenuItem component={Link} href='/cart' onClick={handleClose}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <ShoppingCartIcon fontSize="small" />
           </ListItemIcon>
-          Settings
+          Carrinho
         </MenuItem>
+
+        <MenuItem component={Link} href='/favorites' onClick={handleClose}>
+          <ListItemIcon>
+            <FavoriteIcon fontSize="small" />
+          </ListItemIcon>
+          Favoritos
+        </MenuItem>
+        <Divider />
+        
+        {/* MenuItem para trocar o tema */}
+        {/* <MenuItem onClick={(e) => { e.stopPropagation(); toggleTheme(); }}>
+          <ListItemIcon>
+            <Lightbulb fontSize="small" color={theme === 'light' ? 'warning' : 'primary'} />
+          </ListItemIcon>
+          Tema {theme === 'light' ? 'Claro' : 'Escuro'}
+        </MenuItem> */}
+
         <MenuItem component={Link} href='/logout' onClick={handleClose}>
           <ListItemIcon>
             <Logout fontSize="small" />

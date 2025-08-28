@@ -12,10 +12,10 @@ export function Navbar() {
 
   const links = [
     { href: "/", label: "Home" },
-    { href: "/catalogo", label: "Catálogo" },
-    { href: "/sobre", label: "Sobre Nós" },
+    { href: "/catalog", label: "Catálogo" },
+    { href: "/about", label: "Sobre Nós" },
     { href: "/faq", label: "FAQ" },
-    { href: "/contato", label: "Contato" },
+    { href: "/contact", label: "Contato" },
   ];
 
   return (
