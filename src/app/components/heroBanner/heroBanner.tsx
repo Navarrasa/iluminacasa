@@ -1,18 +1,14 @@
 "use client";
 
 import Image from 'next/image';
-import { useTheme, useMediaQuery } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import { bannerImages } from "@/data/images";
 
 export default function HeroBanner() {
-  const theme = useTheme();
   const isMobile = useMediaQuery("(max-width:689px)");
-  const darkmode = theme.palette.mode === 'dark';
 
   const getImage = () => {
-    if (isMobile && darkmode) return bannerImages[3].image; // mobileDark
-    if (isMobile && !darkmode) return bannerImages[2].image; // mobileLight
-    if (!isMobile && darkmode) return bannerImages[1].image; // desktopDark
+    if (isMobile) return bannerImages[1].image; // mobileLight
     return bannerImages[0].image; // desktopLight
   };
 
@@ -28,7 +24,7 @@ export default function HeroBanner() {
         width={1440}
         height={400}
         priority
-        style={{ width: "100%", height: "auto" }}
+        style={{ width: "100%", height: "auto", objectFit: "cover" }}
       />
     </section>
   );
