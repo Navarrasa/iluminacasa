@@ -1,5 +1,7 @@
 import httpx
 from sqlmodel import Session
+from sqlalchemy import func
+from sqlmodel import select
 
 from config.database.models.product import ProductDB
 
@@ -34,3 +36,19 @@ async def getAll(db: Session):
 
     db.commit()
     return inserted_products
+
+
+async def getBestSellers(db: Session):
+    # Flow:
+    """
+    Faz uma requisição ao banco de dados
+    Pega 12 itens aleatoriamente e retorna como um objeto
+    para ser utilizado no frontend
+    
+    """
+    statement = select(ProductDB).order_by(func.random()).limit(12)
+    return db.exec(statement).all()
+
+
+
+    

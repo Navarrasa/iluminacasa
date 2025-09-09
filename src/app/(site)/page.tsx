@@ -1,6 +1,6 @@
 "use client";
 
-import HeroBanner from '@/app/components/heroBanner';
+import HeroBanner from '@/app/components/hero/heroBanner';
 import Search from '@/app/components/search';
 import Bestsellers from '@/app/components/bestsellers';
 import Reviews from '@/app/components/reviews';
