@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from api.v1.api import router as api_router
 # Importar Tabelas
 from config.database.models.user import User
-
+from config.middleware.config import configure_middleware
 
 from config.database.config import create_db_and_tables
 
@@ -21,6 +21,9 @@ class BaseConfig:
     def create_app(self):
         # Criar banco de dados
         create_db_and_tables()
+        
+        # Configurar middlewares
+        configure_middleware(self.app)
 
         # Criar rotas
         self.app.include_router(api_router, prefix="/api/v1")

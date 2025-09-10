@@ -27,7 +27,7 @@ export default function HeroBanner() {
         priority
         style={{ width: "100%", height: "auto", objectFit: "cover" }}
       />
-      <div className='absolute z-10 bottom-0 sm:w-9/12 w-6/12 flex justify-center sm:mb-4 mb-2'>
+      <div className='absolute z-1 bottom-0 sm:w-9/12 w-6/12 flex justify-center sm:mb-4 mb-2'>
         <Link href="/catalog" 
         className="bg-[var(--accent-color)] sm:p-4 p-2 rounded-2xl sm:w-[10rem] text-center opacity-90
         hover:scale-110 transition duration-700 hover:opacity-100 text-white font-semibold
