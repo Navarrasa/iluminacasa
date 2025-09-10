@@ -1,5 +1,5 @@
 from fastapi import Depends
-from sqlmodel import select, Session
+from sqlmodel import Session
 from config.database.config import get_session
 from config.database.schemas.user import UserLogin, UserCreate
 from config.utils.security import verify_password, pwd_context

@@ -37,7 +37,6 @@ class Product(BaseModel):
 # Schema para renderizar produtos na landing page
 class LandingProducts(BaseModel):
     title: str
-    description: str
     category: str
     price: float
     discount: float

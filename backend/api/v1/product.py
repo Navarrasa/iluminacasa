@@ -7,6 +7,8 @@ from config.database.models.user import User
 from config.database.config import get_session
 from services.products.products import getAll
 from services.dependencies import get_current_user
+from services.products.products import getBestSellers
+from config.database.schemas.products import LandingProducts
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
@@ -35,7 +37,15 @@ async def populate_products(
     result = await getAll(db)
     return {"inserted": len(result)}
 
-# Produtos que serão renderizados na landing page
-# @router.get("/products", summary="Get all products", response_model=LandingProducts)
-# async def getLandingpageProducts():
-#     await pass
+
+# Best Sellers, produtos que serão renderixados na Landing Page
+@router.get("/products/best-sellers", summary="Best Sellers", response_model=list[LandingProducts])
+async def best_sellers(
+    db: Session = Depends(get_session),
+    ):
+    """
+    Pega 12 itens aleatoriamente e retorna como um objeto
+    para ser utilizado no frontend
+    """
+    result = await getBestSellers(db)
+    return result
