@@ -4,10 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { GetBestSellers } from '@/app/api/api';
 import BestsellersCard  from '@/app/components/cards/bestsellersCard';
 import { useEffect, useState } from 'react';
+import type { Product } from "@/app/components/cards/bestsellersCard";
 
 export default function Bestsellers() {
 
-    const [product, setProduct] = useState<any[]>([]);
+    const [product, setProduct] = useState<Product[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
