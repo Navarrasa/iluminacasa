@@ -38,6 +38,11 @@ async def getAll(db: Session):
     return inserted_products
 
 
+async def getAllProducts(db: Session):
+    statement = select(ProductDB)
+    return db.exec(statement).all()
+
+
 async def getBestSellers(db: Session):
     # Flow:
     """

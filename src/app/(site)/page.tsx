@@ -3,7 +3,6 @@
 import HeroBanner from '@/app/components/hero/heroBanner';
 import Search from '@/app/components/search';
 import Bestsellers from '@/app/components/bestsellers';
-import Reviews from '@/app/components/reviews';
 
 export default function Home() {
 
@@ -12,7 +11,6 @@ export default function Home() {
       <HeroBanner/>
       <Search />
       <Bestsellers />
-      <Reviews />
     </section>  
   );
 }

@@ -7,8 +7,8 @@ from config.database.models.user import User
 from config.database.config import get_session
 from services.products.products import getAll
 from services.dependencies import get_current_user
-from services.products.products import getBestSellers
-from config.database.schemas.products import LandingProducts
+from services.products.products import getBestSellers, getAllProducts
+from config.database.schemas.products import LandingProducts, ProductReviews
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
@@ -31,8 +31,7 @@ GET product by title
 # Popular banco de dados do backend
 @router.get("/data/products", summary="Populate DB", response_model=ProductDB)
 async def populate_products(
-    db: Session = Depends(get_session),
-    current_user: User = Depends(get_current_user)
+    db: Session = Depends(get_session)
     ):
     result = await getAll(db)
     return {"inserted": len(result)}
@@ -48,4 +47,16 @@ async def best_sellers(
     para ser utilizado no frontend
     """
     result = await getBestSellers(db)
+    return result
+
+
+@router.get("/products/reviews", summary="Get product reviews", response_model=list[ProductReviews])
+async def product_reviews(
+    db: Session = Depends(get_session),
+    ):
+    """
+    Pega todas as avaliações de produtos e retorna como um objeto
+    para ser utilizado no frontend
+    """
+    result = await getAllProducts(db)
     return result

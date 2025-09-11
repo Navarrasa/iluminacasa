@@ -2,42 +2,24 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import { GetBestSellers } from '@/app/api/api';
-import BestsellersCard  from '@/app/components/cards/bestsellersCard';
-import { useEffect, useState } from 'react';
-import type { Product } from "@/app/types/types";
 
-export default function Bestsellers() {
-
-    const [product, setProduct] = useState<Product[]>([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await GetBestSellers();
-            setProduct(data);
-        };
-        fetchData();
-    }, []);
-
-    if (!product) {
-        return (
-            <div className="flex flex-col items-center justify-center text-2xl p-4">
-                Carregando Produtos...
-            </div>
-        );
-    }
+export default function PartnerShips() {
 
     return(
-        <section className="flex flex-col w-full justify-center items-center p-8 gap-2">
-            <h2 className="text-3xl p-4">Produtos Mais Vendidos</h2>
-            <div className="flex w-full h-auto justify-center items-center">
-                <Swiper
-                spaceBetween={30}
+        <section className="w-full flex flex-col p-4">
+            <div>
+                <h2>
+                    Parceiros da IluminaCasa
+                </h2>
+            </div>
+            <div>
+                 <Swiper
+                spaceBetween={50}
                 modules={[Autoplay]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 loop={true}
                 className="w-full h-full"
-                slidesPerView={5}
+                slidesPerView={6}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
                 breakpoints={{
@@ -64,9 +46,9 @@ export default function Bestsellers() {
 
                 }}
                 >
-                    {product.map((item, idx) => (
+                    {partners.map((item, idx) => (
                         <SwiperSlide key={idx}>
-                            <BestsellersCard product={item} />
+                            <PartnersCard product={item} />
                         </SwiperSlide>
                     ))}
                 </Swiper>

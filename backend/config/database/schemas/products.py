@@ -19,6 +19,13 @@ Schema que irá definir o que a API irá puxar para o banco de dados
 
 """
 
+class Review(BaseModel):
+    rating: int
+    date: str
+    reviewerName: str
+    reviewerEmail: str
+
+
 class Product(BaseModel):
     title: str
     description: str
@@ -30,7 +37,7 @@ class Product(BaseModel):
     tags: List[str]
     brand: str
     warranty: str
-    reviews: List[str]
+    reviews: List[Review]
     image: List[str]
 
 
@@ -42,3 +49,9 @@ class LandingProducts(BaseModel):
     discount: float
     rating: float
     image: List[str]
+
+
+class ProductReviews(BaseModel):
+    title: str
+    rating: float
+    reviews: Review
