@@ -10,7 +10,7 @@ interface ProductCardProps {
 
 export default function BestsellersCard({ product }: ProductCardProps) {
   return (
-    <div className="w-auto rounded-2xl shadow-md mb-4 overflow-hidden bg-white flex flex-col h-auto">
+    <div className="w-auto rounded-2xl shadow-md mb-4 overflow-hidden bg-white flex flex-col h-[35rem]">
       {/* Tags no topo */}
       {product.tags && (
         <div className="absolute flex gap-2 p-2">

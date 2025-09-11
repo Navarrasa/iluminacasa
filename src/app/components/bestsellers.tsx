@@ -34,11 +34,11 @@ export default function Bestsellers() {
                 <Swiper
                 spaceBetween={30}
                 modules={[Autoplay]}
-                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                autoplay={{ delay: 8000, disableOnInteraction: false }}
                 loop={true}
                 className="w-full h-full"
                 slidesPerView={5}
-                onSlideChange={() => console.log('slide change')}
+                // onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
                 breakpoints={{
                     320: {
