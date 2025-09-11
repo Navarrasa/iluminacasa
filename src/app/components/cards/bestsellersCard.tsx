@@ -1,8 +1,9 @@
 'use client';
 
 import React from "react";
+import Image from "next/image";
 
-type Product = {
+export type Product = {
   title: string;
   category: string;
   price: number;
@@ -35,10 +36,12 @@ export default function BestsellersCard({ product }: ProductCardProps) {
 
       {/* Imagem */}
       <div className="h-full w-full p-4">
-        <img
+        <Image
           src={product.image[0]}
           alt={product.title}
           className="w-full h-full object-cover"
+          width={500}
+          height={500}
         />
       </div>
 
