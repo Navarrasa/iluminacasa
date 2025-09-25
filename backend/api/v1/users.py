@@ -51,3 +51,9 @@ async def loginUser(form_data: UserLogin, db: SessionDep, response: Response):
 @router.post("/logout", summary="User logout")
 async def logoutUser():
     return await logout()
+
+# GET /profile — pegar dados do usuário logado
+
+# PUT /profile — atualizar dados do usuário (nome, email, senha, etc)
+
+# GET /users/:id/orders — histórico de pedidos do usuário (pode ser protegido)

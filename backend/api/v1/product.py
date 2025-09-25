@@ -60,3 +60,46 @@ async def product_reviews(
     """
     result = await getAllProducts(db)
     return result
+
+
+# GET /products — listar produtos com filtros (categoria, preço, busca, etc)
+
+# GET /products/:id — detalhes de um produto específico
+
+# GET /products/best-sellers — produtos mais vendidos (como você já fez)
+
+# GET /products/reviews — reviews aleatórios ou recentes (você também mencionou)
+
+# GET /products/categories — listar categorias disponíveis (iluminação LED, halógena, etc)
+
+# GET /cart — mostrar itens no carrinho do usuário
+
+# POST /cart — adicionar produto ao carrinho
+
+# PUT /cart/:productId — alterar quantidade do produto no carrinho
+
+# DELETE /cart/:productId — remover produto do carrinho
+
+# DELETE /cart — esvaziar carrinho
+
+# Pedidos (Orders)
+
+# POST /orders — criar pedido (checkout)
+
+# GET /orders/:id — detalhes do pedido
+
+# GET /orders — listar pedidos do usuário
+
+# PUT /orders/:id/cancel — cancelar pedido (se possível)
+
+# GET /orders/status/:status — listar pedidos por status (pendente, enviado, entregue)
+
+# Reviews e Avaliações
+
+# POST /products/:id/reviews — criar review para um produto
+
+# GET /products/:id/reviews — listar reviews do produto
+
+# PUT /reviews/:id — editar review (somente dono)
+
+# DELETE /reviews/:id — excluir review (somente dono)
