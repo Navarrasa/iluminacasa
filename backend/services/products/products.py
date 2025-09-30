@@ -39,6 +39,12 @@ async def getAll(db: Session):
 
 
 async def getAllProducts(db: Session):
+    # Flow:
+    """
+    Faz uma requisição ao banco de dados
+    Pega todos os produtos e retorna como um objeto
+
+    """
     statement = select(ProductDB)
     return db.exec(statement).all()
 
@@ -55,5 +61,14 @@ async def getBestSellers(db: Session):
     return db.exec(statement).all()
 
 
-
+async def searchProducts(query: str, db: Session):
+    # Flow:
+    """
+    Realiza uma busca de produtos com base na query fornecida
+    
+    """
+    statement = select(ProductDB).where(
+        ProductDB.title.ilike(f"%{query}%")
+    )
+    return db.exec(statement).all()
     

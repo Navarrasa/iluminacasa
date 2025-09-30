@@ -7,26 +7,12 @@ from config.database.models.user import User
 from config.database.config import get_session
 from services.products.products import getAll
 from services.dependencies import get_current_user
-from services.products.products import getBestSellers, getAllProducts
+from services.products.products import getBestSellers, getAllProducts, searchProducts
 from config.database.schemas.products import LandingProducts, ProductReviews
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
 router = APIRouter()
-
-"""
-
-Product Router
-
-contains all the routes for product for DB population
-
-GET all products
-GET product by tags
-GET procuct by brand
-GET product by title
-
-
-"""
 
 # Popular banco de dados do backend
 @router.get("/data/products", summary="Populate DB", response_model=ProductDB)
@@ -37,7 +23,9 @@ async def populate_products(
     return {"inserted": len(result)}
 
 
-# Best Sellers, produtos que serão renderixados na Landing Page
+# LANDING PAGE #
+
+# Best Sellers, produtos que serão renderizados na Landing Page
 @router.get("/products/best-sellers", summary="Best Sellers", response_model=list[LandingProducts])
 async def best_sellers(
     db: Session = Depends(get_session),
@@ -48,6 +36,20 @@ async def best_sellers(
     """
     result = await getBestSellers(db)
     return result
+
+# Search bar na Landing page
+@router.get("/search/", summary="Search Products", response_model=list[LandingProducts])
+async def search_products(
+    query: str,
+    db: Session = Depends(get_session),
+    ):
+    """
+    Realiza uma busca de produtos com base na query fornecida
+    """
+    result = await searchProducts(query, db)
+    return result
+
+
 
 
 @router.get("/products/reviews", summary="Get product reviews", response_model=list[ProductReviews])
@@ -72,27 +74,8 @@ async def product_reviews(
 
 # GET /products/categories — listar categorias disponíveis (iluminação LED, halógena, etc)
 
-# GET /cart — mostrar itens no carrinho do usuário
 
-# POST /cart — adicionar produto ao carrinho
 
-# PUT /cart/:productId — alterar quantidade do produto no carrinho
-
-# DELETE /cart/:productId — remover produto do carrinho
-
-# DELETE /cart — esvaziar carrinho
-
-# Pedidos (Orders)
-
-# POST /orders — criar pedido (checkout)
-
-# GET /orders/:id — detalhes do pedido
-
-# GET /orders — listar pedidos do usuário
-
-# PUT /orders/:id/cancel — cancelar pedido (se possível)
-
-# GET /orders/status/:status — listar pedidos por status (pendente, enviado, entregue)
 
 # Reviews e Avaliações
 
@@ -100,6 +83,3 @@ async def product_reviews(
 
 # GET /products/:id/reviews — listar reviews do produto
 
-# PUT /reviews/:id — editar review (somente dono)
-
-# DELETE /reviews/:id — excluir review (somente dono)
