@@ -3,7 +3,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { GetBestSellers } from '@/app/api/api';
-import BestsellersCard  from '@/app/components/cards/bestsellersCard';
+import ProductCard  from '@/app/components/cards/ProductCard';
 import { useEffect, useState } from 'react';
 import type { Product } from "@/app/types/types";
 
@@ -66,7 +66,7 @@ export default function Bestsellers() {
                 >
                     {product.map((item, idx) => (
                         <SwiperSlide key={idx}>
-                            <BestsellersCard product={item} />
+                            <ProductCard product={item} />
                         </SwiperSlide>
                     ))}
                 </Swiper>

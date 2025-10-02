@@ -10,3 +10,13 @@ export const GetBestSellers = async () => {
         throw error;
     }
 };
+
+export const SearchBarQuery = async (query: string) => {
+    try{
+        const response = await axios.get(`${BASE_URL}search/?query=${query}`)
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching search results:", error);
+        throw error;
+    }
+}

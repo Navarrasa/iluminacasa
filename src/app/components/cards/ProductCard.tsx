@@ -8,7 +8,7 @@ interface ProductCardProps {
   product: Product;
 }
 
-export default function BestsellersCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="w-auto rounded-2xl shadow-md mb-4 overflow-hidden bg-white flex flex-col h-150">
       {/* Tags no topo */}
