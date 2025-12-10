@@ -2,7 +2,7 @@ from fastapi import Depends
 from sqlmodel import Session
 from config.database.config import get_session
 from config.database.schemas.user import UserLogin, UserCreate
-from config.utils.security import verify_password, pwd_context
+from config.utils.security import verify_password, safe_hash_password
 from fastapi.responses import JSONResponse
 from config.database.models.user import User
 from services.dependencies import get_user
@@ -24,8 +24,10 @@ async def register(register_data: UserCreate, db=Depends(get_session)):
     
     existing_user = get_user(db, register_data.email)
     if existing_user:   
-        return JSONResponse(status_code=400, content={"message": "User already exists"})
-    hashed_password = pwd_context.hash(register_data.password)
+        return JSONResponse(status_code=400, content={"message": "This e-mail is already being used!"})
+    
+    hashed_password = safe_hash_password(register_data.password)
+
     user = User(
         email=register_data.email,
         password=hashed_password,
